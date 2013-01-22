@@ -1,0 +1,77 @@
+html
+  head
+    title Bless You Ants... Blants
+    style(type='text/css')
+      body {
+      padding:30px;
+      font-family:helvetica, verdana, sans-serif;
+      background:url('http://www.thanksants.com/bg.gif') 0 30px repeat-x #957538;
+      color:#000;
+      }
+      a:link, a:visited {
+      color:#472C0F;
+      }
+      div {
+      margin:0 0 20px 0;
+      }
+      #ants,#blants {
+      font-size:400%;
+      font-weight:bold;
+      margin-bottom:0.75em;
+      color:#251c0b;
+      }
+      #news {
+      position:absolute;
+      top:600px;
+      left:50px;
+      font-size:10px;
+      }
+      form { display:inline;}
+    script(src='http://code.jquery.com/jquery-1.9.0.min.js')
+    script(type='text/javascript')
+      String.prototype.toCapitalize = function() { 
+        return this.toLowerCase().replace(/^.|\s\S/g, function(a) { return a.toUpperCase(); });
+      };
+
+      var blantsTimeout = null;
+      function display() {
+      var word = $('#word').val();
+        displayWord(word);
+      }
+      function blantify(word) {
+      while(word.length && 'aeiou'.indexOf(word.toLowerCase().charAt(0)) == -1 ) {
+      word = word.slice(1);
+      }
+      return "Bl" + word + ".";
+      }
+
+      function displayWord(word) {
+        $('#ants').html('Bless you ' + word.toCapitalize() + '...');
+        clearTimeout(blantsTimeout);
+        $("#blants").html('');
+        blantsTimeout = setTimeout(function() {
+        $('#blants').html(blantify(word))
+        }, 2000);
+      }
+      $(function() {
+        displayWord('#{word}')
+      });
+  body
+    #top
+      img(src='public/computer2.gif', width='160', height='139')
+      form
+        input#word(type='text', name='word', value='#{word}')
+        input(type='button', value='Re-calculate', onclick='display(); return false;')
+    #ants Bless you #{word}...
+    #blants Bl#{word}.
+    #news
+      strong News
+      | : You can now give blants by putting the recipient at the end of the URL, like this:
+      a(href='http://blessyouants.com/Paul') http://blessyouants.com/Paul
+      br
+      | This is a shameless copy of
+      a(href='http://www.twitter.com/mattjones') @mattjones
+      | 's
+      a(href='http://thankyouants.com') http://thankyouants.com
+      | shamelessly copied by
+      a(href='http://www.twitter.com/thepaulbooth') @thepaulbooth
