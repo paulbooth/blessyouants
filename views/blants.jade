@@ -53,15 +53,22 @@ html
         $('#blants').html(blantify(word))
         }, 2000);
       }
+      function searchKeyPress(e) {
+          // look for window.event in case event isn't passed in
+          if (typeof e == 'undefined' && window.event) { e = window.event; }
+          if (e.keyCode == 13)
+          {
+              $('#recalc').click();
+          }
+      }
       $(function() {
         displayWord('#{word}')
       });
   body
     #top
       img(src='public/computer2.gif', width='160', height='139')
-      form
-        input#word(type='text', name='word', value='#{word}')
-        input(type='button', value='Re-calculate', onclick='display(); return false;')
+      input#word(type='text', name='word', value='#{word}', onkeypress="searchKeyPress(event);")
+      input#recalc(type='button', value='Re-calculate', onclick='display(); return false;')
     #ants Bless you #{word}...
     #blants Bl#{word}.
     #news
