@@ -39,8 +39,10 @@ html
         displayWord(word);
       }
       function blantify(word) {
-      while(word.length && 'aeiou'.indexOf(word.toLowerCase().charAt(0)) == -1 ) {
+        var foundConst = false;
+      while(word.length && 'aeiou'.indexOf(word.toLowerCase().charAt(0)) == -1 && !(foundConst &&  word.toLowerCase().charAt(0) == 'y' ) ) {
       word = word.slice(1);
+      foundConst = true;
       }
       return "Bl" + word + ".";
       }
