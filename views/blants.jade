@@ -44,6 +44,9 @@ html
       word = word.slice(1);
       foundConst = true;
       }
+      if (word.length) {
+        word = word.charAt(0).toLowerCase() + word.slice(1);
+      }
       return "Bl" + word + ".";
       }
 
